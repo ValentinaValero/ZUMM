@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Produtos | ZUMM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --mel: #E8B923;
+            --vivo: #FFD93D;
+            --oliva: #A3AC5B;
+            --oliva-esc: #6F7A2F;
+            --creme: #F9F6E8;
+            --ouro: #C99A12;
+            --marrom: #5A2A12;
+            --folha: #E9EDB8;
+            box-sizing: border-box;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+            color-scheme: light
+        }
+
+        html {
+            scroll-padding-top: calc(80px + env(safe-area-inset-top, 0px));
+            scroll-behavior: smooth
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit
+        }
+
+        body {
+            margin: 0;
+            background: var(--creme);
+            color: var(--marrom);
+            font: 17px/1.6 Nunito, system-ui, sans-serif
+        }
+
+        h1,
+        h2,
+        h3,
+        .f {
+            font-family: Itim, "Comic Sans MS", cursive;
+            font-weight: 400;
+            margin: 0
+        }
+
+        a {
+            color: inherit
+        }
+
+        :focus-visible {
+            outline: 3px solid var(--marrom);
+            outline-offset: 3px
+        }
+
+        header {
+            position: sticky;
+            top: env(safe-area-inset-top, 0px);
+            z-index: 10;
+            background: var(--oliva);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 6px 20px;
+            min-height: 64px
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-size: 26px
+        }
+
+        .brand img {
+            width: 75px;
+            height: auto;
+        }
+
+        nav {
+            display: flex;
+            gap: 6px;
+            align-items: center
+        }
+
+        nav a {
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 99px;
+            font-family: Itim, cursive;
+            font-size: 19px
+        }
+
+        nav a:hover,
+        nav a.on {
+            background: var(--folha)
+        }
+
+        .cartbtn {
+            background: var(--vivo);
+            border: 0;
+            border-radius: 99px;
+            padding: 6px 16px;
+            font: 19px Itim, cursive;
+            color: var(--marrom);
+            cursor: pointer
+        }
+
+        /* BANNER: troque img/banner.jpg pela sua imagem */
+        .banner {
+            position: relative;
+            display: grid;
+            place-items: center;
+            min-height: 260px;
+            padding: 40px 20px;
+            background: linear-gradient(rgba(5, 5, 4, 0.041), rgba(5, 5, 4, 0.082)), url('./img/banner8.png') center/cover no-repeat;
+
+        }
+
+        .banner:before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(90, 42, 18, .25)
+        }
+
+        .banner h1 {
+            position: relative;
+            font-size: clamp(48px, 10vw, 88px);
+            color: #fff;
+            text-shadow: -3px 0 0 var(--ouro), 3px 0 0 var(--ouro), 0 -3px 0 var(--ouro), 0 3px 0 var(--ouro),
+                -3px -3px 0 var(--ouro), 3px 3px 0 var(--ouro), -3px 3px 0 var(--ouro), 3px -3px 0 var(--ouro)
+        }
+
+        .btn {
+            display: inline-block;
+            background: #387a38;
+            color: white;
+            border: 0;
+            border-radius: 99px;
+            padding: 10px 26px;
+            font: 22px Itim, cursive;
+            text-decoration: none;
+            
+            cursor: pointer;
+            box-shadow: 0 4px 0 #204920
+        }
+
+        .btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 var(--ouro)
+        }
+
+        .btn.alt {
+            color: rgb(41, 33, 9);
+            background: #dfe69a;
+            box-shadow: 0 4px 0 var(--oliva)
+        }
+
+        .btn.sm {
+            font-size: 18px;
+            padding: 6px 18px
+        }
+
+        main {
+            max-width: 1040px;
+            margin: 0 auto;
+            padding: 56px 20px
+        }
+
+        .panel {
+            background: var(--folha);
+            border-radius: 48px;
+            padding: 36px 28px
+        }
+
+        .grid {
+            display: grid;
+            gap: 22px;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr))
+        }
+
+        .card {
+            background: var(--oliva);
+            border-radius: 32px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: transform .35s cubic-bezier(.2, .8, .2, 1), box-shadow .35s ease
+        }
+
+        .card:hover,
+        .card:focus-visible {
+            transform: translateY(-6px);
+            box-shadow: 0 14px 28px rgba(90, 42, 18, .22)
+        }
+
+        .card .art {
+            overflow: hidden
+        }
+
+        .card .art img {
+            transition: transform .5s cubic-bezier(.2, .8, .2, 1)
+        }
+
+        .card:hover .art img {
+            transform: scale(1.06)
+        }
+
+        .card .art {
+            background: linear-gradient(90deg, #445722, var(--oliva));
+            aspect-ratio: 4/3;
+            display: grid;
+            place-items: center
+        }
+
+        .card .art img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block
+        }
+
+        .card .body {
+            padding: 16px 20px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1
+        }
+
+        .tag {
+            align-self: flex-start;
+            background: var(--mel);
+            border-radius: 99px;
+            padding: 2px 18px;
+            font: 22px Itim, cursive
+        }
+
+        .card p {
+            margin: 0;
+            font-size: 15px;
+            flex: 1
+        }
+
+        .price {
+            background: linear-gradient(120deg, var(--mel), var(--vivo));
+            border-radius: 16px;
+            padding: 2px 16px;
+            font: 26px Itim, cursive;
+            display: inline-block
+        }
+
+        .card .price {
+            width: 70%;
+            margin-bottom: 5px;
+            align-self: center;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .acts {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap
+        }
+
+        .card .acts {
+            justify-content: center;
+        }
+
+        footer {
+            background: var(--oliva);
+            padding: 26px 20px;
+            display: flex;
+            gap: 22px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            font-family: Itim, cursive;
+            font-size: 17px;
+            text-align: center
+        }
+
+        footer img {
+            width: 70px;
+        }
+
+        /* Sacola */
+        #drawer {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: min(380px, 100%);
+            background: var(--creme);
+            z-index: 20;
+            padding: calc(20px + env(safe-area-inset-top, 0px)) 22px 22px;
+            transform: translateX(105%);
+            transition: transform .45s cubic-bezier(.2, .8, .2, 1);
+            box-shadow: -8px 0 30px rgba(90, 42, 18, .25);
+            display: flex;
+            flex-direction: column;
+            border-radius: 32px 0 0 32px
+        }
+
+        #drawer.open {
+            transform: none
+        }
+
+        #items {
+            flex: 1;
+            overflow: auto;
+            margin: 10px 0
+        }
+
+        .it {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 0;
+            border-bottom: 2px dotted var(--oliva)
+        }
+
+        .q button {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            border: 0;
+            background: var(--mel);
+            cursor: pointer;
+            font: 18px Itim
+        }
+
+        .q span {
+            display: inline-block;
+            min-width: 22px;
+            text-align: center
+        }
+
+        .tot {
+            font: 26px Itim, cursive;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px
+        }
+
+        .close {
+            align-self: flex-end;
+            background: none;
+            border: 0;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--marrom)
+        }
+
+        .empty {
+            text-align: center;
+            opacity: .8;
+            padding: 30px 0
+        }
+
+        #buy[disabled] {
+            opacity: .5;
+            cursor: not-allowed
+        }
+
+        /* Modais */
+        dialog {
+            border: 0;
+            border-radius: 36px;
+            background: var(--creme);
+            color: var(--marrom);
+            padding: 0;
+            width: min(560px, calc(100% - 24px));
+            max-height: calc(100% - 24px);
+            overflow: auto
+        }
+
+        dialog {
+            opacity: 0;
+            transform: translateY(28px) scale(.95);
+            transition: opacity .35s ease, transform .4s cubic-bezier(.2, .8, .2, 1)
+        }
+
+        dialog.show {
+            opacity: 1;
+            transform: none
+        }
+
+        dialog::backdrop {
+            background: rgba(90, 42, 18, 0);
+            transition: background .35s ease
+        }
+
+        dialog.show::backdrop {
+            background: rgba(90, 42, 18, .5)
+        }
+
+        .mbody {
+            padding: 26px 26px 28px
+        }
+
+        .mimg {
+            aspect-ratio: 16/10;
+            background: linear-gradient(90deg, #445722, var(--oliva))
+        }
+
+        .mimg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block
+        }
+
+        .qty {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font: 22px Itim, cursive
+        }
+
+        .qty button {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            border: 0;
+            background: var(--mel);
+            cursor: pointer;
+            font: 22px Itim
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 2px;
+            font-weight: 700;
+            font-size: 15px
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px 14px;
+            border: 2px solid var(--oliva);
+            border-radius: 16px;
+            background: #fff;
+            font: 16px Nunito, sans-serif;
+            color: var(--marrom)
+        }
+
+        .sum {
+            background: var(--folha);
+            border-radius: 20px;
+            padding: 10px 16px;
+            margin: 14px 0;
+            font-size: 15px
+        }
+
+        .ok {
+            text-align: center;
+            padding: 14px 0
+        }
+
+        .tick {
+            stroke-dasharray: 40;
+            stroke-dashoffset: 40
+        }
+
+        dialog.show .tick {
+            animation: draw .6s .35s ease forwards
+        }
+
+        @keyframes draw {
+            to {
+                stroke-dashoffset: 0
+            }
+        }
+
+        .ok h2 {
+            font-size: 36px;
+            margin: 8px 0
+        }
+
+        @media(max-width:720px) {
+            nav .l {
+                display: none
+            }
+
+            .panel {
+                border-radius: 36px;
+                padding: 26px 16px
+            }
+
+            .banner {
+                min-height: 200px
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            * {
+                transition: none !important;
+                scroll-behavior: auto !important;
+                animation: none !important
+            }
+
+            .tick {
+                stroke-dashoffset: 0
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a class="brand f" href="index.html"><img src="./img/logo.png" alt="ZUMM"></a>
+        <nav>
+            <a class="l" href="index.html#sobre">Sobre</a>
+            <a class="l on" href="produtos.html">Produtos</a>
+            <a class="l" href="index.html#abelhas">Abelhas</a>
+            <button class="cartbtn" id="open" aria-label="Abrir sacola">Sacola (<span id="n">0</span>)</button>
+        </nav>
+    </header>
+
+    <div class="banner">
+        <h1>Produtos</h1>
+    </div>
+
+    <main>
+        <div class="panel">
+            <div class="grid" id="lista"></div>
+        </div>
+    </main>
+
+    <footer>
+        <span>Se tem mel doce,<br>tem abelha feliz.</span>
+        <img src="./img/logo.png" alt="logo">
+        <span>2026 ZUMM. Todos os direitos reservados.</span>
+    </footer>
+
+    <!-- Sacola -->
+    <aside id="drawer" aria-label="Sacola" aria-hidden="true">
+        <button class="close" id="close" aria-label="Fechar">×</button>
+        <h3 class="f" style="font-size:32px">Sua sacola</h3>
+        <div id="items"></div>
+        <div class="tot"><span>Total</span><span id="tot">R$0</span></div>
+        <button class="btn" id="buy" style="text-align:center">Finalizar compra</button>
+    </aside>
+
+    <!-- Inspecionar produto -->
+    <dialog id="dlgProd" aria-labelledby="pn">
+        <div class="mimg"><img id="pimg" src="" alt=""></div>
+        <div class="mbody">
+            <span class="tag" id="pn"></span>
+            <p id="pdesc" style="margin:12px 0 4px"></p>
+            <ul id="pdet" style="margin:0 0 14px;padding-left:20px"></ul>
+            <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+                <span class="price" id="pprice"></span>
+                <span class="qty"><button id="qm" aria-label="Menos">−</button><span id="qv">1</span><button id="qp"
+                        aria-label="Mais">+</button></span>
+            </div>
+            <div class="acts" style="margin-top:18px">
+                <button class="btn" id="padd">Adicionar à sacola</button>
+                <button class="btn alt" data-close="dlgProd">Fechar</button>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Finalizar compra -->
+    <dialog id="dlgBuy" aria-labelledby="bt">
+        <div class="mbody">
+            <div id="step1">
+                <h2 id="bt" style="font-size:34px">Finalizar compra</h2>
+                <div class="sum" id="bsum"></div>
+                <form id="frm">
+                    <label for="fn">Nome</label><input id="fn" required autocomplete="name">
+                    <label for="ft">Telefone / WhatsApp</label><input id="ft" type="tel" inputmode="numeric" required
+                        autocomplete="tel" maxlength="15" placeholder="(41) 99999-9999"
+                        pattern="\(\d{2}\) \d{4,5}-\d{4}" title="Digite DDD + número, ex.: (41) 99999-9999">
+                    <label for="fe">Endereço de entrega</label><input id="fe" required autocomplete="street-address">
+                    <label for="fp">Pagamento</label>
+                    <select id="fp">
+                        <option>Pix</option>
+                        <option>Cartão (na entrega)</option>
+                        <option>Dinheiro</option>
+                    </select>
+                    <div class="acts" style="margin-top:18px">
+                        <button class="btn" type="button" id="confirm">Confirmar compra</button>
+                        <button class="btn alt" type="button" data-close="dlgBuy">Voltar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </dialog>
+
+    <!-- Confirmação -->
+    <dialog id="dlgOk" aria-labelledby="okt" role="alertdialog">
+        <div class="mbody ok">
+            <svg viewBox="0 0 52 52" width="88" height="88" aria-hidden="true">
+                <circle cx="26" cy="26" r="24" fill="#A3AC5B" />
+                <path class="tick" d="M14 27l8 8 16-17" fill="none" stroke="#fff" stroke-width="5"
+                    stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <h2 id="okt">Compra confirmada!</h2>
+            <p id="okmsg" style="margin:0 0 6px"></p>
+            <div class="sum" id="oksum" style="text-align:left"></div>
+            <button class="btn" data-close="dlgOk">Voltar aos produtos</button>
+        </div>
+    </dialog>
+
+    <script>
+        var P = [
+            { id: 'mel', n: 'Mel caseiro', p: 60, d: 'Pote de mel puro, colhido e envasado por nós.', det: ['Mel 100% puro, sem adição de açúcar', 'Produzido em pequenos lotes', 'Colhemos só o excedente da colmeia'], img: './img/mel.webp' },
+            { id: 'pao', n: 'Pão de Mel', p: 12, d: 'Massa macia de mel e especiarias com cobertura de chocolate.', det: ['Feito à mão, do recheio à cobertura', 'Massa com mel e especiarias', 'Cobertura de chocolate'], img: './img/pao2.webp' },
+            { id: 'pane', n: 'Panetone', p: 80, d: 'Panetone de mel, recheado de doce de leite.', det: ['Feito com mel, doce de leite e castanhas', 'Textura crocante', 'Produção artesanal'], img: './img/panettone.jpg' }
+        ];
+        var $ = function (i) { return document.getElementById(i) }, brl = function (v) { return 'R$' + v };
+        var C = {}, cur = null, qty = 1;
+        try { C = JSON.parse(localStorage.getItem('zumm_cart')) || {} } catch (e) { C = {} }
+        function find(i) { return P.filter(function (p) { return p.id == i })[0] }
+        function save() { try { localStorage.setItem('zumm_cart', JSON.stringify(C)) } catch (e) { } }
+
+        $('lista').innerHTML = P.map(function (x) {
+            return '<div class="card" data-view="' + x.id + '" tabindex="0" role="button" aria-label="Ver detalhes de ' + x.n + '"><div class="art"><img src="' + x.img + '" alt="' + x.n + '" loading="lazy"></div><div class="body"><span class="tag">' + x.n + '</span><p>' + x.d + '</p><span class="price">' + brl(x.p) + '</span><div class="acts"><button class="btn sm" data-id="' + x.id + '">Adicionar</button></div></div></div>'
+        }).join('');
+
+        function total() { var t = 0, c = 0; Object.keys(C).forEach(function (i) { t += find(i).p * C[i]; c += C[i] }); return { t: t, c: c } }
+        function render() {
+            var h = '', k = Object.keys(C), s = total();
+            k.forEach(function (i) { var x = find(i); h += '<div class="it"><span>' + x.n + '<br><small>' + brl(x.p) + '</small></span><span class="q"><button data-m="' + i + '" aria-label="Menos">−</button><span>' + C[i] + '</span><button data-a="' + i + '" aria-label="Mais">+</button></span></div>' });
+            $('items').innerHTML = h || '<p class="empty">Sua sacola está vazia. Escolha um doce para começar.</p>';
+            $('tot').textContent = brl(s.t); $('n').textContent = s.c; $('buy').disabled = !s.c; save();
+        }
+        function drawer(o) { $('drawer').classList.toggle('open', o); $('drawer').setAttribute('aria-hidden', !o) }
+        function add(id, n) { C[id] = (C[id] || 0) + n; render() }
+        function setQty(n) { qty = Math.max(1, n); $('qv').textContent = qty }
+
+        document.addEventListener('click', function (e) {
+            var b = e.target.closest('button'); if (!b) { var c = e.target.closest('[data-view]'); if (c) openProd(c.dataset.view); return }
+            if (b.dataset.id) { add(b.dataset.id, 1); b.textContent = 'Adicionado!'; setTimeout(function () { b.textContent = 'Adicionar' }, 900) }
+            if (b.dataset.a) { C[b.dataset.a]++; render() }
+            if (b.dataset.m) { if (--C[b.dataset.m] < 1) delete C[b.dataset.m]; render() }
+            if (b.dataset.close) closeD($(b.dataset.close));
+        });
+        function openProd(id) {
+            cur = find(id); setQty(1);
+            $('pimg').src = cur.img; $('pimg').alt = cur.n; $('pn').textContent = cur.n; $('pdesc').textContent = cur.d;
+            $('pdet').innerHTML = cur.det.map(function (d) { return '<li>' + d + '</li>' }).join(''); $('pprice').textContent = brl(cur.p);
+            openD($('dlgProd'));
+        }
+        function openD(d) { d.showModal(); requestAnimationFrame(function () { requestAnimationFrame(function () { d.classList.add('show') }) }) }
+        function closeD(d) { d.classList.remove('show'); setTimeout(function () { if (d.open) d.close() }, 350) }
+        Array.prototype.forEach.call(document.querySelectorAll('dialog'), function (d) {
+            d.addEventListener('cancel', function (e) { e.preventDefault(); closeD(d) });
+            d.addEventListener('click', function (e) { if (e.target === d) closeD(d) });
+        });
+        document.addEventListener('keydown', function (e) {
+            var c = e.target.closest && e.target.closest('.card');
+            if (c && (e.key == 'Enter' || e.key == ' ')) { e.preventDefault(); openProd(c.dataset.view) }
+        });
+        $('qm').onclick = function () { setQty(qty - 1) }; $('qp').onclick = function () { setQty(qty + 1) };
+        $('padd').onclick = function () { add(cur.id, qty); closeD($('dlgProd')); setTimeout(function () { drawer(true) }, 250) };
+        $('open').onclick = function () { drawer(true) }; $('close').onclick = function () { drawer(false) };
+        document.addEventListener('keydown', function (e) { if (e.key == 'Escape') drawer(false) });
+
+        $('buy').onclick = function () {
+            var s = total(); if (!s.c) return;
+            $('bsum').innerHTML = Object.keys(C).map(function (i) { return C[i] + 'x ' + find(i).n + ' — ' + brl(find(i).p * C[i]) }).join('<br>') + '<br><strong>Total: ' + brl(s.t) + '</strong>';
+            drawer(false); setTimeout(function () { openD($('dlgBuy')) }, 200);
+        };
+        $('ft').addEventListener('input', function () {
+            var d = this.value.replace(/\D/g, '').slice(0, 11), r = d;
+            if (d.length > 10) r = '(' + d.slice(0, 2) + ') ' + d.slice(2, 7) + '-' + d.slice(7);
+            else if (d.length > 6) r = '(' + d.slice(0, 2) + ') ' + d.slice(2, 6) + '-' + d.slice(6);
+            else if (d.length > 2) r = '(' + d.slice(0, 2) + ') ' + d.slice(2);
+            else if (d.length > 0) r = '(' + d;
+            this.value = r;
+        });
+        function confirmar() {
+            if (!$('frm').reportValidity()) return;
+            var nome = $('fn').value.trim().split(' ')[0], end = $('fe').value.trim(), pag = $('fp').value, s = total(),
+                num = 'ZUMM-' + Math.floor(1000 + Math.random() * 9000),
+                itens = Object.keys(C).map(function (i) { return C[i] + 'x ' + find(i).n + ' — ' + brl(find(i).p * C[i]) }).join('<br>');
+            $('okmsg').textContent = 'Obrigado, ' + nome + '! Seu pedido ' + num + ' foi registrado e a entrega está confirmada.';
+            $('oksum').innerHTML = itens + '<br><strong>Total: ' + brl(s.t) + '</strong><hr style="border:0;border-top:2px dotted var(--oliva)"><span id="okend"></span><br><span id="okpag"></span>';
+            $('okend').textContent = 'Entrega em: ' + end; $('okpag').textContent = 'Pagamento: ' + pag;
+            C = {}; render(); $('frm').reset();
+            closeD($('dlgBuy')); setTimeout(function () { openD($('dlgOk')) }, 400);
+        }
+        $('confirm').onclick = confirmar;
+        $('frm').onsubmit = function (e) { e.preventDefault(); confirmar() };
+        render();
+    </script>
+</body>
+
+</html>

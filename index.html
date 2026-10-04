@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>ZUMM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Itim&family=Nunito:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --mel: #E8B923;
+            --vivo: #FFD93D;
+            --oliva: #A3AC5B;
+            --oliva-esc: #6F7A2F;
+            --creme: #F9F6E8;
+            --ouro: #C99A12;
+            --marrom: #5A2A12;
+            --folha: #E9EDB8;
+            box-sizing: border-box;
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px);
+            color-scheme: light
+        }
+
+        html {
+            scroll-padding-top: calc(80px + env(safe-area-inset-top, 0px));
+            scroll-behavior: smooth
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: inherit
+        }
+
+        body {
+            margin: 0;
+            background: var(--creme);
+            color: var(--marrom);
+            font: 17px/1.6 Nunito, system-ui, sans-serif
+        }
+
+        h1,
+        h2,
+        h3,
+        .f {
+            font-family: Itim, "Comic Sans MS", cursive;
+            font-weight: 400;
+            margin: 0
+        }
+
+        a {
+            color: inherit
+        }
+
+        :focus-visible {
+            outline: 3px solid var(--marrom);
+            outline-offset: 3px
+        }
+
+        header {
+            position: sticky;
+            top: env(safe-area-inset-top, 0px);
+            z-index: 10;
+            background: var(--oliva);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 6px 20px;
+            min-height: 64px
+        }
+
+       
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            text-decoration: none;
+            font-size: 26px
+        }
+
+        .brand img {
+            width: 75px;
+            height: auto;
+        
+        }
+
+        nav {
+            display: flex;
+            gap: 6px;
+            align-items: center
+        }
+
+        nav a {
+            text-decoration: none;
+            padding: 6px 14px;
+            border-radius: 99px;
+            font-family: Itim, cursive;
+            font-size: 19px
+        }
+
+        nav a:hover {
+            background: var(--folha)
+        }
+
+        /*Colocar imagem*/
+        .hero {
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-image: url(img/banner1.png);
+            text-align: center;
+            padding: 72px 20px 110px
+        }
+
+        .hero .in {
+            background: rgba(249, 246, 232, .92);
+            display: inline-block;
+            max-width: 620px;
+            padding: 34px 34px 38px;
+            border-radius: 48px;
+        }
+
+        .in img{
+            width: 150px;
+        }
+
+        .hero h1 {
+            font-size: clamp(38px, 7vw, 60px);
+            line-height: 1.1;
+            margin: 6px 0 12px
+        }
+
+        .btn {
+            display: inline-block;
+            background: var(--mel);
+            color: var(--marrom);
+            border: 0;
+            border-radius: 99px;
+            padding: 10px 26px;
+            font: 22px Itim, cursive;
+            text-decoration: none;
+            cursor: pointer;
+            box-shadow: 0 4px 0 var(--ouro)
+        }
+
+        .btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 var(--ouro)
+        }
+
+        section {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 50px 20px
+        }
+
+        h2 {
+            font-size: clamp(34px, 6vw, 48px);
+            text-align: center;
+            margin-bottom: 28px;
+            color: #fff;
+            -webkit-text-stroke: 0;
+            text-shadow: 0 0 0 #000, -2px 0 0 var(--ouro), 2px 0 0 var(--ouro), 0 -2px 0 var(--ouro), 0 2px 0 var(--ouro), -2px -2px 0 var(--ouro), 2px 2px 0 var(--ouro), -2px 2px 0 var(--ouro), 2px -2px 0 var(--ouro)
+        }
+
+        .panel {
+            background: var(--folha);
+            border-radius: 48px;
+            padding: 36px 28px
+        }
+
+        .sobre {
+            display: grid;
+            gap: 22px;
+            grid-template-columns: 1fr 1fr;
+            align-items: center
+        }
+
+        .sobre p {
+            margin: 0 0 12px
+        }
+
+        /*Colocar imagem*/
+        .sobre .tile {
+            background-image: url(./img/banner7.jpg);
+            background-position: bottom;
+            border-radius: 36px;
+            min-height: 240px
+        }
+
+        .produtos-resumo {
+            text-align: center
+        }
+
+        .produtos-resumo p {
+            margin: 0 auto 22px;
+            max-width: 560px
+        }
+
+        .bee {
+            background: var(--folha);
+            border-radius: 48px;
+            overflow: hidden
+        }
+
+        .bee .top {
+            background: var(--oliva-esc);
+            color: #fff;
+            padding: 30px 28px;
+            text-align: center
+        }
+
+        .bee .top h2 {
+            margin: 0
+        }
+
+        .bee .txt {
+            padding: 30px 32px;
+            display: grid;
+            gap: 16px;
+            grid-template-columns: repeat(3, 1fr)
+        }
+
+        .bee h3 {
+            font-size: 24px;
+            margin-bottom: 4px
+        }
+
+        .bee p {
+            margin: 0;
+            font-size: 16px
+        }
+
+        footer {
+            background: var(--oliva);
+            padding: 26px 20px;
+            display: flex;
+            gap: 22px;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            font-family: Itim, cursive;
+            font-size: 17px;
+            text-align: center
+        }
+
+        footer img {
+            width: 70px;
+            
+        }
+
+        @media(max-width:720px) {
+
+            .sobre,
+            .bee .txt {
+                grid-template-columns: 1fr
+            }
+
+            nav a {
+                padding: 6px 10px;
+                font-size: 17px
+            }
+
+            .panel {
+                border-radius: 36px;
+                padding: 26px 16px
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            * {
+                transition: none !important;
+                scroll-behavior: auto !important
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a class="brand f" href="#topo">
+            <img src="./img/logo.png" alt="logo">
+        </a>
+        <nav>
+            <a href="#sobre">Sobre</a>
+            <a href="#produtos">Produtos</a>
+            <a href="#abelhas">Abelhas</a>
+        </nav>
+    </header>
+
+    <div class="hero" id="topo">
+        <div class="in">
+            <!--Coloca a imagem-->
+            <img src="./img/logo.png" alt="imagem">
+
+            <h1>Mel e pão de mel feitos à mão</h1>
+            <p>Direto do apiário para a sua mesa: doce de verdade, com gosto de sol e flor.</p>
+        </div>
+    </div>
+
+    <section id="sobre">
+        <h2>Quem faz a ZUMM</h2>
+        <div class="panel sobre">
+            <div>
+                <p>A ZUMM nasceu do zumbido de uma colmeia e de uma vontade simples: fazer doces que sabem de onde vêm.
+                </p>
+                <p>Cada pote de mel e cada pão de mel é feito em pequenos lotes, sem pressa e sem fórmula industrial. Do
+                    favo à cobertura de chocolate, tudo passa pelas nossas mãos.</p>
+                <p>Aqui a abelha vem primeiro: respeitamos o tempo delas, e o resultado é um mel dourado, cheiroso e
+                    cheio de sabor.</p>
+            </div>
+            <div class="tile" role="img" aria-label="Padrão de favos ZUMM"></div>
+        </div>
+    </section>
+
+    <section id="produtos">
+        <h2>Produtos</h2>
+        <div class="panel produtos-resumo">
+            <p>Mel caseiro, pão de mel e torrone, feitos em pequenos lotes e com ingredientes de verdade. Veja todos os
+                sabores e preços na nossa página de produtos.</p>
+            <a class="btn" href="produtos.html">Conhecer os produtos</a>
+        </div>
+    </section>
+
+    <section id="abelhas">
+        <h2>Proteção às abelhas</h2>
+        <div class="bee">
+            <div class="top f" style="font-size:24px">Sem abelha, não tem mel. Sem mel, não tem ZUMM.</div>
+            <div class="txt">
+                <div>
+                    <h3>Manejo gentil</h3>
+                    <p>Colhemos só o excedente e deixamos mel suficiente para a colmeia passar o inverno.</p>
+                </div>
+                <div>
+                    <h3>Flores por perto</h3>
+                    <p>Apiários em áreas de mata e flora variada, longe de agrotóxicos.</p>
+                </div>
+                <div>
+                    <h3>Cruelty free</h3>
+                    <p>Nada de testes ou maus-tratos: o cuidado com as abelhas vem antes da venda.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <span>Se tem mel doce,<br>tem abelha feliz.</span>
+        <img src="./img/logo.png" alt="logo">
+        <span>2026 ZUMM. Todos os direitos reservados.</span>
+    </footer>
+</body>
+
+</html>
